@@ -1,8 +1,8 @@
 ﻿using PetAdoptionSystem.Models;
 using PetAdoptionSystem.Services;
-using PetAdoptionSystem.Strategies;
 
 PetService petService = new PetService();
+PetCatalogFacade petCatalog = new PetCatalogFacade(petService);
 
 petService.AddPet(new Pet
 {
@@ -23,20 +23,16 @@ foreach (Pet pet in petService.GetAllPets())
     Console.WriteLine($"Adopted: {pet.IsAdopted}");
 }
 
-petService.SetSearchStrategy(new SearchBySpecies());
-
 Console.WriteLine("\nSearch results for cats:");
 
-foreach (Pet pet in petService.SearchPets("Cat"))
+foreach (Pet pet in petCatalog.SearchBySpecies("Cat"))
 {
     Console.WriteLine($"{pet.Name} - {pet.Species}");
 }
 
-petService.SetSearchStrategy(new SearchByName());
-
 Console.WriteLine("\nSearch results for Luna:");
 
-foreach (Pet pet in petService.SearchPets("Luna"))
+foreach (Pet pet in petCatalog.SearchByName("Luna"))
 {
     Console.WriteLine($"{pet.Name} - {pet.Species}");
 }
