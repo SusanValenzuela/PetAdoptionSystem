@@ -24,5 +24,12 @@ I chose strategy so the pet catalog can use different search algorithms through 
 
 The console demo searches for the species `Cat` and the name `Luna`. The Kata 02 `PetCatalogFacade` selects each strategy and calls `PetService` for the console.
 
+## Second Design Pattern — Facade
+I chose Facade to make pet searches easier to call from the console. `PetCatalogFacade` provides `SearchByName` and `SearchBySpecies` methods. Each method selects the appropriate search strategy and runs the search through `PetService`.
+
+`PetCatalogFacade` is the facade, `PetService` and the search strategies are the subsystem classes, and `Program.cs` is the client. This keeps the steps for selecting and running a search together, so the console only needs one method call for each search operation.
+
+The console demo calls `SearchBySpecies("Cat")` and `SearchByName("Luna")`. Both searches return Luna, showing that the facade works with the existing Strategy implementation.
+
 ## Future Plans
 As the quarter progresses, I plan to expand the application by adding more features and implementing different data structures. I also plan to write additional unit tests to make sure everything works correctly.
